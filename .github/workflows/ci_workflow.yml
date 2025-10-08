@@ -1,0 +1,41 @@
+name: Model Retraining Workflow CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Memungkinkan trigger manual
+
+jobs:
+  train_model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Conda Environment
+        uses: conda-incubator/setup-conda@v3
+        with:
+          python-version: 3.9
+          environment-file: MLProject/conda.yaml
+          activate-environment: mlflow-re-train-env
+          auto-activate-base: false
+          
+      - name: Install MLflow (jika belum terinstal di conda.yaml)
+        shell: bash
+        run: |
+          pip install mlflow
+
+      - name: Run MLflow Project (Re-Training Model)
+        shell: bash
+        run: |
+          # Perintah ini akan menjalankan entry point 'main' di file MLProject
+          # dan otomatis menggunakan env 'conda.yaml'
+          mlflow run . --experiment-name "CI_Retraining"
+          
+      - name: Upload MLflow Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlruns-artifacts
+          path: mlruns/

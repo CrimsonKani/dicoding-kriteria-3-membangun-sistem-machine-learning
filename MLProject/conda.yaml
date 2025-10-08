@@ -1,0 +1,14 @@
+name: mlflow-re-train-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - pip:
+    - pandas
+    - numpy
+    - scikit-learn
+    - mlflow
+    - matplotlib
+    - seaborn
