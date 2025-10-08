@@ -1,9 +1,0 @@
-name: used_car_price_prediction_ci
-
-# Definisikan environment yang digunakan (merujuk ke conda.yaml)
-conda_env: MLProject/conda.yaml
-
-# Definisikan entry point untuk re-training
-entry_points:
-  main:
-    command: "python MLProject/modelling.py"

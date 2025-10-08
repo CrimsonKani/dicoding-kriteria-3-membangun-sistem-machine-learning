@@ -26,7 +26,7 @@ jobs:
         shell: bash
         run: |
           # Pastikan micromamba sudah aktif dan MLflow sudah terinstal dari conda.yaml
-          micromamba run -n mlflow-re-train-env mlflow run -f MLProject.yaml . --experiment-name "CI_Retraining"
+          micromamba run -n mlflow-re-train-env mlflow run . --experiment-name "CI_Retraining"
           
       - name: Upload MLflow Artifacts
         uses: actions/upload-artifact@v4
