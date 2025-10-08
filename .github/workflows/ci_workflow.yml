@@ -1,3 +1,11 @@
+name: Model Retraining Workflow CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   train_model:
     runs-on: ubuntu-latest
